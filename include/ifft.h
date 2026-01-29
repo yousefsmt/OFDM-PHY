@@ -19,4 +19,26 @@
  */
 
 
+#include <stdio.h>
+#include <assert.h>
+#include <fftw3.h>
+#include <complex.h>
+#include <string.h>
+
+#define NORM_FACTOR(size) (1/sqrt((double)(size)))
+#define IFFT_SIZE 128
+
+typedef struct
+{
+    size_t        ifft_size;
+    fftw_complex* input;
+    fftw_complex* output;
+    fftw_plan     ifft_plan_complex;
+}ifft_config;
+
+
+int init_ifft(ifft_config* config);
+int run_ifft(ifft_config* config, double complex* input_array, double complex* output_array);
+int close_ifft(ifft_config* config);
+
 #endif // !PHY_SOURCE_IFFT_H_
